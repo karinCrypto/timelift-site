@@ -65,6 +65,15 @@ h1 span{display:block}
 .store .flag{width:30px;height:30px;margin-left:4px}
 .store.off{opacity:.5;cursor:default;filter:grayscale(.4)}.store.off:hover{transform:none}
 .soon{flex-basis:100%;font-size:13.5px;font-weight:600;color:var(--pink)}.end .soon{color:#FFC2DF}
+.dlhero{padding:72px 0 28px;text-align:center}.dlhero .sub{margin:0 auto 8px}
+.dlgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 26px;text-align:left}
+.dlc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px 26px;display:flex;flex-direction:column;gap:12px}
+.dlc .pi{margin:0}.dlc h3{margin:6px 0 0;font-size:21px;letter-spacing:-.03em}.dlc p{margin:0;color:var(--ink2);line-height:1.6;font-size:15.5px;flex:1}
+.dlc .stores{flex-direction:column;gap:10px}.dlc .store{justify-content:flex-start}.dlc .store .flag{margin-left:auto}
+.dlc .wait{display:inline-block;align-self:flex-start;font-weight:800;font-size:14.5px;color:var(--pink);background:var(--soft);padding:10px 16px;border-radius:99px}
+.dlnote{max-width:760px;margin:0 auto;color:var(--ink2);font-size:15px;line-height:1.7}
+.dlback{display:inline-block;margin:28px 0 60px;font-weight:800;color:var(--pink)}
+@media (max-width:960px){.dlgrid{grid-template-columns:1fr}}
 .fine{font-size:13.5px;color:var(--ink3);margin-top:16px}
 .stage{position:relative;height:640px}
 .phone{position:absolute;width:300px;border-radius:44px;padding:10px;background:#1b0716;box-shadow:0 40px 80px rgba(120,20,70,.28),0 0 0 1px rgba(255,255,255,.4) inset}
@@ -325,7 +334,7 @@ footer{padding:64px 0 40px;color:var(--ink2);font-size:15px}
 
 <footer><div class="wrap">
   <div class="fg"><div><a class="logo" href="#top"><img src="img/icon.png" alt="">TimeLift</a><p style="margin:14px 0 0;max-width:300px;line-height:1.6">Say it, it's planned. Then Tami calls you.</p></div>
-  <div><h4>Product</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="https://timelift.app/download-en.html">Mac app</a></div><div><h4>Download</h4><a href="https://apps.apple.com/kr/app/id6762095162">App Store · Korea</a><a href="https://apps.apple.com/us/app/id6762095162">App Store · US</a><a href="#download">Google Play · back in December</a></div><div><h4>Help</h4><a href="https://timelift.app/support.html">Support</a><a href="#business">Business inquiry</a><a href="#faq">FAQ</a></div></div>
+  <div><h4>Product</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="download-en.html">Download</a></div><div><h4>Download</h4><a href="https://apps.apple.com/kr/app/id6762095162">App Store · Korea</a><a href="https://apps.apple.com/us/app/id6762095162">App Store · US</a><a href="#download">Google Play · back in December</a></div><div><h4>Help</h4><a href="https://timelift.app/support.html">Support</a><a href="#business">Business inquiry</a><a href="#faq">FAQ</a></div></div>
   <div class="fb"><span>© 2026 TimeLift</span><span><a href="https://timelift.app/terms.html">Terms of Use</a><a href="https://timelift.app/privacy-policy.html">Privacy Policy</a><a href="index.html">한국어</a></span></div>
 </div></footer>
 
