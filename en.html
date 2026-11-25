@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TimeLift — Say it, it's planned. Then Tami calls you.</title>
+<meta name="description" content="An AI voice planner: say your tasks, Tami turns them into a daily plan and rings you like a phone call when it is time.">
+<meta property="og:title" content="TimeLift — Say it, it's planned. Then Tami calls you.">
+<meta property="og:description" content="An AI voice planner: say your tasks, Tami turns them into a daily plan and rings you like a phone call when it is time.">
+<meta property="og:image" content="https://timelift.app/og-banner.png">
+<meta name="theme-color" content="#FFF4F9">
+<link rel="icon" href="img/icon.png">
+<link rel="alternate" hreflang="ko" href="index.html">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--ink:#27051C;--ink2:rgba(39,5,28,.66);--ink3:rgba(39,5,28,.45);--pink:#E0457F;--hot:#FF56BA;--soft:#FFE3F1;--bg:#FFF7FB;--card:#fff;--line:rgba(39,5,28,.09);--r:28px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+em{font-style:normal;background:linear-gradient(90deg,var(--pink),var(--hot));-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,247,251,.78);backdrop-filter:saturate(1.6) blur(16px);-webkit-backdrop-filter:saturate(1.6) blur(16px);border-bottom:1px solid transparent;transition:border-color .2s}
+nav.s{border-color:var(--line)}
+.nav{display:flex;align-items:center;height:68px;gap:28px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.3px}
+.logo img{width:34px;height:34px;border-radius:10px}
+.links{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--ink2)}.links a:hover{color:var(--ink)}
+.right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.lang{font-size:14px;font-weight:700;color:var(--ink2);padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;padding:12px 20px;border-radius:99px;background:var(--ink);color:#fff;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(39,5,28,.18)}
+.btn.pk{background:linear-gradient(135deg,var(--pink),var(--hot));box-shadow:0 12px 28px rgba(224,69,127,.32)}
+/* hero */
+.hero{position:relative;padding:72px 0 40px;overflow:hidden}
+.hero:before{content:'';position:absolute;inset:-200px -200px auto auto;width:820px;height:820px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,141,198,.45),transparent);z-index:-1}
+.hero:after{content:'';position:absolute;left:-260px;top:200px;width:640px;height:640px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,227,241,.95),transparent);z-index:-1}
+.hgrid{display:grid;grid-template-columns:1.08fr .92fr;gap:40px;align-items:center}
+.ey{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--pink);background:#fff;border:1px solid rgba(224,69,127,.18);padding:8px 14px;border-radius:99px}
+.ey i{width:7px;height:7px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 4px rgba(255,86,186,.18)}
+h1{font-size:clamp(40px,5.6vw,70px);line-height:1.1;letter-spacing:-.045em;font-weight:850;margin:22px 0 22px}
+h1 span{display:block}
+.sub{font-size:clamp(17px,1.6vw,20px);line-height:1.65;color:var(--ink2);max-width:560px;margin:0 0 30px}
+.stores{display:flex;flex-wrap:wrap;gap:12px}
+.store{display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:11px 20px 11px 16px;border-radius:16px;font-weight:700;font-size:18px;line-height:1.05;transition:transform .15s}
+.store:hover{transform:translateY(-2px)}.store small{display:block;font-size:11px;font-weight:500;opacity:.75;letter-spacing:.2px}
+.store .flag{width:30px;height:30px;margin-left:4px}
+.store.off{opacity:.5;cursor:default;filter:grayscale(.4)}.store.off:hover{transform:none}
+.soon{flex-basis:100%;font-size:13.5px;font-weight:600;color:var(--pink)}.end .soon{color:#FFC2DF}
+.fine{font-size:13.5px;color:var(--ink3);margin-top:16px}
+.stage{position:relative;height:640px}
+.phone{position:absolute;width:300px;border-radius:44px;padding:10px;background:#1b0716;box-shadow:0 40px 80px rgba(120,20,70,.28),0 0 0 1px rgba(255,255,255,.4) inset}
+.phone img{width:100%}
+.phone:before,.phone:after{content:"";position:absolute;width:3px;border-radius:2px;background:#2a0d22}
+.phone:before{right:-3px;top:26%;height:13%}
+.phone:after{left:-3px;top:20%;height:9%;box-shadow:0 calc(var(--vh,1)*0px) 0 #2a0d22}
+.scr{position:relative;border-radius:35px;overflow:hidden;background:var(--sbg);container-type:inline-size;color:#000}
+.scr.dk{color:#fff}
+.sb{height:13.5cqw;display:flex;align-items:center;justify-content:space-between;padding:1.5cqw 7.5cqw 0 10cqw;position:relative}
+.sb .tm{font-weight:650;font-size:5.4cqw;letter-spacing:-.02em;font-family:-apple-system,'SF Pro Text','Pretendard Variable',sans-serif}
+.sb .isl{position:absolute;left:50%;top:3cqw;width:30cqw;height:8.8cqw;margin-left:-15cqw;border-radius:99px;background:#000}
+.sb .ic{display:flex;align-items:center;gap:1.6cqw}
+.sb svg{fill:currentColor}.sb .sig{width:5.600cqw}.sb .wifi{width:5cqw}
+.sb .bat{position:relative;width:8.200cqw;height:3.900cqw;border:.35cqw solid currentColor;border-radius:1.300cqw;opacity:.95;padding:.45cqw}
+.sb .bat:after{content:'';position:absolute;right:-1.300cqw;top:50%;width:.8cqw;height:1.500cqw;margin-top:-.75cqw;border-radius:0 .6cqw .6cqw 0;background:currentColor;opacity:.5}
+.sb .bat i{display:block;height:100%;width:80%;border-radius:.6cqw;background:currentColor}
+.scr .hb{position:absolute;left:50%;bottom:2.200cqw;width:36cqw;height:1.500cqw;margin-left:-18cqw;border-radius:99px;background:#000;opacity:.82}
+.scr.dk .hb{background:#fff;opacity:.9}
+.p1{right:120px;top:0;transform:rotate(-4deg);z-index:2}
+.p2{right:-10px;top:90px;width:250px;transform:rotate(6deg);opacity:.96}
+.callc{position:absolute;left:-10px;bottom:70px;z-index:3;display:flex;align-items:center;gap:14px;background:rgba(20,4,16,.92);color:#fff;padding:14px 18px 14px 14px;border-radius:24px;box-shadow:0 24px 50px rgba(39,5,28,.35);animation:bob 4s ease-in-out infinite}
+.callc .av{position:relative;width:54px;height:54px;border-radius:50%;background:#3a0b2c;display:grid;place-items:center}
+.callc .av img{width:46px}
+.callc .av:after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--hot);animation:ring 1.6s ease-out infinite}
+.callc b{font-size:16px}.callc small{display:block;color:#FF8FCB;font-size:12.5px;font-weight:700;margin:1px 0 3px}.callc p{margin:0;font-size:13.5px;opacity:.86}
+.callc .ok{width:40px;height:40px;border-radius:50%;background:#34C759;display:grid;place-items:center;margin-left:6px}
+@keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.35);opacity:0}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.mascot{position:absolute;right:-30px;bottom:-20px;width:170px;z-index:4;filter:drop-shadow(0 20px 30px rgba(224,69,127,.4))}
+/* devices + stats */
+.on{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;margin-top:40px;padding-top:28px;border-top:1px solid var(--line);font-weight:700;color:var(--ink3)}
+.on b{font-size:13px;letter-spacing:.4px;color:var(--ink3);font-weight:700}.on span{font-size:17px;color:var(--ink2)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 24px}
+.stat b{display:block;font-size:30px;letter-spacing:-.03em;font-weight:850;color:var(--pink)}.stat span{font-size:15px;color:var(--ink2);line-height:1.5}
+/* sections */
+section{padding:96px 0}
+.sh{text-align:center;max-width:760px;margin:0 auto 52px}
+.lab{font-size:14px;font-weight:800;letter-spacing:.3px;color:var(--pink);text-transform:uppercase}
+h2{font-size:clamp(32px,4vw,50px);line-height:1.16;letter-spacing:-.04em;font-weight:850;margin:12px 0 14px}
+.sh p{font-size:18px;color:var(--ink2);line-height:1.6;margin:0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;position:relative}
+.step .n{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:850;color:#fff;background:linear-gradient(135deg,var(--pink),var(--hot));margin-bottom:20px}
+.step h3{font-size:22px;letter-spacing:-.03em;margin:0 0 10px}.step p{margin:0;color:var(--ink2);line-height:1.6;font-size:16px}
+.chip{display:inline-block;margin-top:18px;font-size:13px;font-weight:700;color:var(--pink);background:var(--soft);padding:6px 12px;border-radius:99px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:56px 0}
+.feat.rev .ft{order:2}
+.ft .q{display:inline-block;font-size:16px;font-weight:600;color:var(--ink2);background:#fff;border:1px solid var(--line);padding:10px 16px;border-radius:18px 18px 18px 4px;margin:14px 0 6px}
+.ft h3{font-size:clamp(28px,3.2vw,40px);line-height:1.2;letter-spacing:-.04em;font-weight:850;margin:12px 0 16px}
+.ft p{font-size:17px;line-height:1.7;color:var(--ink2);margin:0 0 20px}
+.ft ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.ft li{display:flex;gap:10px;align-items:flex-start;font-size:16px;font-weight:600}.ft li svg{color:var(--pink);flex:none;margin-top:2px}
+.fi{position:relative;display:flex;justify-content:center;padding:36px 0;border-radius:36px;background:linear-gradient(150deg,#FFE3F1,#FFC2DF 55%,#FF9ED0);overflow:hidden}
+.fi.dark{background:linear-gradient(155deg,#2A0B24,#5A1240 60%,#CC285C)}
+.fi .phone{position:relative;width:min(300px,70%)}
+/* table */
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;min-width:640px;font-size:16px}
+th,td{padding:18px 22px;text-align:left;border-bottom:1px solid var(--line)}tr:last-child td{border:0}
+th{font-size:14px;color:var(--ink3);font-weight:700}td:first-child{font-weight:700;color:var(--ink2);width:20%}
+th:nth-child(2),td:nth-child(2){background:rgba(255,227,241,.55);color:var(--ink);font-weight:750}
+th:nth-child(2){color:var(--pink);font-size:16px}
+/* privacy */
+.privbox{background:linear-gradient(160deg,#fff,#FFF0F7);border:1px solid rgba(224,69,127,.16);border-radius:40px;padding:64px 48px 48px}
+.privbox .sh{margin-bottom:40px}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pc{background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px 22px}
+.pi{width:48px;height:48px;border-radius:16px;background:var(--soft);display:grid;place-items:center;font-size:24px;margin-bottom:16px}
+.pc h3{font-size:18px;letter-spacing:-.02em;margin:0 0 8px}.pc p{margin:0;font-size:15px;line-height:1.6;color:var(--ink2)}
+.pnote{text-align:center;color:var(--ink2);font-size:15px;line-height:1.6;margin:30px 0 0}.pnote a{color:var(--pink);font-weight:700;white-space:nowrap}
+.pthx{text-align:center;font-weight:800;font-size:18px;margin:14px 0 0}
+@media (max-width:960px){.pgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pgrid{grid-template-columns:1fr}.privbox{padding:48px 18px 32px;border-radius:30px}}
+/* business */
+.bizbox{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;background:linear-gradient(155deg,#2A0B24,#4A0F36 60%,#7A1A4E);color:#fff;border-radius:40px;padding:64px 56px}
+.bizbox .lab{color:#FF8FCB}.bizbox h2{color:#fff}.bizbox h2 em{background:linear-gradient(90deg,#FF8FCB,#FFC2DF);-webkit-background-clip:text;background-clip:text}
+.bh>p{font-size:17px;line-height:1.7;opacity:.8;margin:0 0 28px}
+.btn.bw{background:#fff;color:var(--ink)}.bn{font-size:14px!important;opacity:.6!important;margin:16px 0 0!important;line-height:1.6}
+.bgrid{display:grid;gap:14px}
+.bc{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:22px}
+.bc .pi{background:rgba(255,143,203,.16);margin:0;flex:none}
+.bc.etc{border:1.5px dashed rgba(255,143,203,.55);background:rgba(255,143,203,.08);transition:background .15s,transform .15s}
+.bc.etc:hover{background:rgba(255,143,203,.16);transform:translateY(-2px)}
+.bc .more{display:inline-block;margin-top:10px;font-size:14px;font-weight:800;color:#FF8FCB}
+.bc h3{margin:2px 0 6px;font-size:18px}.bc p{margin:0;font-size:15px;line-height:1.6;opacity:.75}
+@media (max-width:960px){.bizbox{grid-template-columns:1fr;padding:48px 24px;gap:32px}}
+@media (max-width:560px){.bizbox{padding:40px 18px;border-radius:30px}}
+.mdlg{position:fixed;inset:0;z-index:99;background:rgba(39,5,28,.55);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.mdlg.on{display:flex}
+.mbox{background:#fff;color:var(--ink);border-radius:30px;padding:32px 28px 20px;width:min(420px,100%);display:grid;gap:10px;text-align:center;box-shadow:0 40px 90px rgba(39,5,28,.4)}
+.mbox h3{margin:0;font-size:24px;letter-spacing:-.03em}.mbox p{margin:0 0 6px;color:var(--ink2);font-size:15px}
+.maddr{font-weight:800;font-size:16px;background:var(--soft);color:var(--pink);padding:12px;border-radius:14px;margin-bottom:6px;word-break:break-all}
+.mbox .btn{width:100%;border:0;cursor:pointer;font-family:inherit}.btn.mg{background:#F4EEF2;color:var(--ink)}
+.mx{border:0;background:none;color:var(--ink3);font-weight:700;font-size:15px;padding:10px;cursor:pointer;font-family:inherit}
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column}
+.plan.hi{background:var(--ink);color:#fff;border:0;box-shadow:0 30px 60px rgba(39,5,28,.25)}
+.plan .nm{font-weight:800;font-size:18px;display:flex;align-items:center;gap:10px}
+.badge{font-size:12px;font-weight:800;color:#2A1A00;background:#E9C46A;padding:5px 10px;border-radius:99px}
+.plan .pr{font-size:44px;font-weight:850;letter-spacing:-.04em;margin:16px 0 20px}.plan .pr small{font-size:16px;font-weight:600;opacity:.6;margin-left:4px}
+.plan ul{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:12px;flex:1}
+.plan li{display:flex;gap:10px;font-size:15.5px;line-height:1.45}.plan li svg{color:var(--pink);flex:none;margin-top:1px}.plan.hi li svg{color:#FF8FCB}
+.plan .btn{width:100%}.plan.hi .btn{background:#fff;color:var(--ink)}
+.plan:not(.hi) .btn{background:var(--soft);color:var(--pink)}
+.addon{text-align:center;color:var(--ink2);font-size:15px;margin-top:22px;line-height:1.6}
+/* faq */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:0 24px}
+summary{list-style:none;cursor:pointer;font-weight:750;font-size:17.5px;padding:22px 0;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:'+';font-size:24px;line-height:1;color:var(--pink);transition:transform .2s}
+details[open] summary:after{transform:rotate(45deg)}
+details p{margin:0 0 22px;color:var(--ink2);line-height:1.7;font-size:16px}
+/* end */
+.end{margin:0 24px;border-radius:40px;background:linear-gradient(150deg,#2A0B24,#5A1240 55%,#CC285C);color:#fff;text-align:center;padding:84px 24px;position:relative;overflow:hidden}
+.end img.m{width:150px;margin:0 auto 10px;filter:drop-shadow(0 20px 40px rgba(255,86,186,.55))}
+.end h2{color:#fff}.end h2 em{background:linear-gradient(90deg,#FF8FCB,#FFC2DF);-webkit-background-clip:text;background-clip:text}
+.end p{opacity:.78;font-size:18px;margin:0 0 30px}
+.end .stores{justify-content:center}.end .store{background:#fff;color:var(--ink)}
+footer{padding:64px 0 40px;color:var(--ink2);font-size:15px}
+.fg{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:30px}
+.fg h4{margin:0 0 14px;font-size:14px;color:var(--ink)}.fg a{display:block;margin-bottom:10px}.fg a:hover{color:var(--pink)}
+.fb{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;margin-top:44px;padding-top:24px;border-top:1px solid var(--line);font-size:14px;color:var(--ink3)}
+.fb span a{margin-left:16px}
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.callc,.callc .av:after{animation:none}}
+@media (max-width:960px){
+  .links{display:none}.hgrid,.feat{grid-template-columns:1fr;gap:40px}.feat.rev .ft{order:0}
+  .stage{height:560px;max-width:460px;margin:0 auto;width:100%}.p1{right:auto;left:50%;margin-left:-170px}.p2{right:0}
+  .steps,.plans{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}.nav .btn{display:none}h1{font-size:38px}
+  .stats{grid-template-columns:1fr}.stage{height:500px}.phone{width:240px}.p1{margin-left:-150px}.p2{width:200px;top:70px}
+  .callc{left:0;bottom:40px}.callc p{max-width:150px}.mascot{width:120px;right:-10px}
+  section{padding:72px 0}.feat{padding:36px 0}.end{margin:0 12px;padding:64px 20px}.fg{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav id="nav"><div class="wrap nav">
+  <a class="logo" href="#top"><img src="img/icon.png" alt="">TimeLift</a>
+  <div class="links"><a href="#features">Features</a><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#business">Business</a><a href="#faq">FAQ</a></div>
+  <div class="right"><a class="lang" href="index.html">한국어</a><a class="btn pk" href="#download">Start free</a></div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="hgrid">
+    <div>
+      <span class="ey"><i></i>An AI voice planner for busy, scattered minds</span>
+      <h1><span>Say it, it's planned.</span><span>Then <em>Tami calls you</em>.</span></h1>
+      <p class="sub">“Team meeting at 2, groceries after.” Just say it. Tami sorts it into to-dos and a timeline, and when the time comes, it rings you like a phone call.</p>
+      <div id="download"><div class="stores ">
+  <a class="store" href="https://apps.apple.com/kr/app/id6762095162"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.700-3-1.900-3.600-2-1.500-.2-3 .9-3.700.9-.8 0-2-.9-3.200-.9-1.700 0-3.200 1-4 2.400-1.700 3-.4 7.400 1.200 9.800.8 1.200 1.800 2.500 3 2.400 1.200 0 1.700-.8 3.100-.8 1.500 0 1.900.8 3.200.8 1.300 0 2.100-1.200 2.900-2.400.9-1.400 1.300-2.700 1.300-2.800 0 0-2.500-1-2.300-3.700zM14 5.400c.7-.8 1.100-1.900 1-3-1 0-2.100.7-2.800 1.500-.6.700-1.200 1.800-1 2.900 1.100.1 2.100-.6 2.800-1.400z"/></svg><span><small>App Store</small>Korea</span><img class="flag" src="img/flag-kr.svg" alt=""></a>
+  <a class="store" href="https://apps.apple.com/us/app/id6762095162"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.700-3-1.900-3.600-2-1.500-.2-3 .9-3.700.9-.8 0-2-.9-3.200-.9-1.700 0-3.200 1-4 2.400-1.700 3-.4 7.400 1.200 9.800.8 1.200 1.800 2.500 3 2.400 1.200 0 1.700-.8 3.100-.8 1.500 0 1.900.8 3.200.8 1.300 0 2.100-1.200 2.900-2.400.9-1.400 1.300-2.700 1.300-2.800 0 0-2.500-1-2.300-3.700zM14 5.400c.7-.8 1.100-1.900 1-3-1 0-2.100.7-2.800 1.500-.6.700-1.200 1.800-1 2.900 1.100.1 2.100-.6 2.800-1.400z"/></svg><span><small>App Store</small>USA</span><img class="flag" src="img/flag-us.svg" alt=""></a>
+  <span class="store off" aria-disabled="true"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#00D7FE" d="M3.6 2.300 13.400 12 3.600 21.700c-.4-.2-.6-.6-.6-1.100V3.400c0-.5.2-.9.6-1.100z"/><path fill="#FFCE00" d="m16.800 8.600-3.400 3.400 3.400 3.400 3.800-2.200c1-.6 1-1.900 0-2.400z"/><path fill="#FF3A44" d="M13.400 12 3.600 21.700c.3.2.8.2 1.300 0l11.900-6.300z"/><path fill="#00F076" d="M13.400 12 16.800 8.600 4.900 2.300c-.5-.3-1-.2-1.300 0z"/></svg><span><small>Back in December</small>Google Play</span></span>
+</div></div>
+      <p class="fine">Free sign-up in a minute · Core features free · Cancel anytime</p>
+    </div>
+    <div class="stage">
+      <div class="phone p2"><div class="scr dk" style="--sbg:#050306"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img src="img/en-call.jpg" alt="TimeLift app screen"><span class="hb"></span></div></div>
+      <div class="phone p1"><div class="scr" style="--sbg:#EADAE4"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img src="img/en-home.jpg" alt="TimeLift app screen"><span class="hb"></span></div></div>
+      <div class="callc"><div class="av"><img src="img/tami-fluffy.png" alt=""></div>
+        <div><b>Tami</b><small>is calling</small><p>It's time for the 2 PM team meeting!</p></div>
+        <div class="ok"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.100.4 2.300.6 3.600.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.500c.6 0 1 .4 1 1 0 1.300.2 2.500.6 3.600.1.300 0 .700-.2 1z"/></svg></div></div>
+      <img class="mascot" src="img/tami-fluffy.png" alt="">
+    </div>
+  </div>
+  <div class="on"><b>Works on</b><span>iPhone</span><span>iPad</span><span>Apple Watch</span><span>Android</span><span>Mac</span></div>
+  <div class="stats"><div class="stat rv"><b>3×</b><span>Missed it? Tami calls again at 2, 5 and 10 min</span></div><div class="stat rv"><b>1 min</b><span>From one sentence to a full day plan</span></div><div class="stat rv"><b>1 token = 1 min</b><span>Meetings turned into summaries and to-dos</span></div></div>
+</div></header>
+
+<section id="how"><div class="wrap">
+  <div class="sh rv"><div class="lab">How it works</div><h2>Say → sort → ring.</h2></div>
+  <div class="steps"><div class="step rv"><div class="n">1</div><h3>Say it</h3><p>Tap the mic and talk through your day. No order, no format.</p><span class="chip">~10 sec</span></div><div class="step rv"><div class="n">2</div><h3>Tami sorts it</h3><p>Splits it into to-dos and a timeline that fits your free slots.</p><span class="chip">Automatic</span></div><div class="step rv"><div class="n">3</div><h3>It rings on time</h3><p>Instead of a banner, a call screen rings and Tami reads the task aloud.</p><span class="chip">Calls again if missed</span></div></div>
+</div></section>
+
+<section id="features" style="padding-top:20px"><div class="wrap">
+  <div class="feat">
+    <div class="ft rv"><div class="lab">Tami's call</div><div class="q">“I swipe away every notification.”</div><h3>So you get a <em>call</em> instead.</h3><p>When a task is due, a call screen rings and Tami reads it out. Miss it, and Tami calls again after 2, 5 and 10 minutes. It stops as soon as you answer, finish or move the task.</p>
+      <ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>An in-app screen, not a real phone call — no charges</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>“Call again” can be turned off in Settings</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Answer from your Apple Watch</span></li></ul></div>
+    <div class="fi rv dark"><div class="phone"><div class="scr dk" style="--sbg:#050306"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img loading="lazy" src="img/en-call.jpg" alt="TimeLift app screen — Tami's call"><span class="hb"></span></div></div></div>
+  </div>
+  <div class="feat rev">
+    <div class="ft rv"><div class="lab">Daily plan</div><div class="q">“Planning feels like a task itself.”</div><h3>One sentence becomes a <em>timeline</em>.</h3><p>“Deep work from 9, stretch at 10:30.” Say it and it lands in the right slots. View by day, week or month, with your calendar events alongside.</p>
+      <ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Morning routine as a tap-through pill pack</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Apple and Google Calendar side by side</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Finished tasks roll into a daily report</span></li></ul></div>
+    <div class="fi rv"><div class="phone"><div class="scr" style="--sbg:#FFFFFF"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img loading="lazy" src="img/en-plan.jpg" alt="TimeLift app screen — Daily plan"><span class="hb"></span></div></div></div>
+  </div>
+  <div class="feat">
+    <div class="ft rv"><div class="lab">Morning briefing</div><div class="q">“I open five apps every morning.”</div><h3>Weather, news and markets on <em>one page</em>.</h3><p>Wake up to local weather, top headlines and market indices in one place. Every story shows its source and opens the original article.</p>
+      <ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Local weather (never stored on our server)</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Headlines in your app language first</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Read aloud</span></li></ul></div>
+    <div class="fi rv"><div class="phone"><div class="scr" style="--sbg:#F9EAF1"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img loading="lazy" src="img/en-brief2.jpg" alt="TimeLift app screen — Morning briefing"><span class="hb"></span></div></div></div>
+  </div>
+  <div class="feat rev">
+    <div class="ft rv"><div class="lab">Meeting notes</div><div class="q">“After a meeting, I forget what we decided.”</div><h3>Record it, get <em>decisions and to-dos</em>.</h3><p>Record a meeting and get a summary, plus views by topic and by speaker. Action items go to your to-do list with one tap.</p>
+      <ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Speaker labels</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Share as text or PDF</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>2h, 5h and 10h top-ups</span></li></ul></div>
+    <div class="fi rv"><div class="phone"><div class="scr" style="--sbg:#C6DCF3"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img loading="lazy" src="img/en-note.jpg" alt="TimeLift app screen — Meeting notes"><span class="hb"></span></div></div></div>
+  </div>
+  <div class="feat">
+    <div class="ft rv"><div class="lab">Focus · SNS Urge Guard</div><div class="q">““Just a quick scroll” turns into an hour.”</div><h3>Try to leave, and <em>Tami pulls you back</em>.</h3><p>Focus with a science-based Pomodoro. If you reach for social apps mid-session, Tami calls you back. Focus music and proof-photo camera included.</p>
+      <ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>15–50 min or free focus</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Brainwave and focus sounds</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Count of urges beaten today</span></li></ul></div>
+    <div class="fi rv dark"><div class="phone"><div class="scr" style="--sbg:#FDF4F9"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img loading="lazy" src="img/en-sns.jpg" alt="TimeLift app screen — Focus · SNS Urge Guard"><span class="hb"></span></div></div></div>
+  </div>
+  <div class="feat rev">
+    <div class="ft rv"><div class="lab">Mandalart · Vision board</div><div class="q">“I set yearly goals, then forget them.”</div><h3>Keep goals <em>where you see them</em>.</h3><p>Break your year into a Mandalart and pin photos to a vision board. Swipe to pick a cover photo for your home-screen widget.</p>
+      <ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Mandalart and vision board side by side on Home</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>D-day countdowns</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Home-screen widgets</span></li></ul></div>
+    <div class="fi rv"><div class="phone"><div class="scr" style="--sbg:#EADAE4"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img loading="lazy" src="img/en-goals.jpg" alt="TimeLift app screen — Mandalart · Vision board"><span class="hb"></span></div></div></div>
+  </div>
+</div></section>
+
+<section style="padding-top:40px"><div class="wrap">
+  <div class="sh rv"><div class="lab">Compare</div><h2>From plans you write down to plans you <em>keep</em>.</h2></div>
+  <div class="tbl rv"><table><thead><tr><th></th><th>TimeLift</th><th>Calendar app</th><th>Paper planner</th></tr></thead>
+  <tbody><tr><td>Input</td><td>Say it once</td><td>Field by field</td><td>By hand</td></tr><tr><td>Reminders</td><td>Rings like a call + calls again</td><td>One banner</td><td>None</td></tr><tr><td>Daily timeline</td><td>Filled in for you</td><td>Drag it yourself</td><td>Manual</td></tr><tr><td>Meetings</td><td>Recording → summary & to-dos</td><td>None</td><td>None</td></tr><tr><td>Focus help</td><td>Pomodoro + SNS Urge Guard</td><td>None</td><td>None</td></tr><tr><td>Goals</td><td>Mandalart & vision board widgets</td><td>None</td><td>First page only</td></tr></tbody></table></div>
+</div></section>
+
+<section id="privacy" style="padding-top:40px"><div class="wrap">
+  <div class="privbox rv">
+    <div class="sh"><div class="lab">Privacy</div><h2>Your data is <em>yours</em>.</h2><p>We keep only what the app needs, and use it only to run the app.</p></div>
+    <div class="pgrid"><div class="pc"><div class="pi">🔒</div><h3>No sensitive data</h3><p>We never collect health or medical data, national ID numbers, card or bank details, or ad-tracking IDs.</p></div><div class="pc"><div class="pi">📍</div><h3>Location stays rough</h3><p>Your precise location never reaches our server. Weather uses only a ~1 km area.</p></div><div class="pc"><div class="pi">🤖</div><h3>AI chats are not kept</h3><p>AI chat and meeting notes are used only to make the answer, and are not stored on our server.</p></div><div class="pc"><div class="pi">🗑️</div><h3>Delete anytime</h3><p>We never sell your data or use it for ads. Delete your account and everything is erased right away.</p></div></div>
+    <p class="pnote">Your sign-in name and email, and the plans you write, are kept only to sync across your devices. <a href="https://timelift.app/privacy-policy.html">Read the Privacy Policy →</a></p>
+    <p class="pthx">Thank you for trusting us.</p>
+  </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <div class="sh rv"><div class="lab">Pricing</div><h2>Start free. Upgrade when you need more.</h2><p>Prices are shown in the app exactly as here. Cancel subscriptions anytime.</p></div>
+  <div class="plans"><div class="plan rv"><div class="nm">Free</div>
+    <div class="pr">$0<small></small></div><ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Voice to-dos and timeline</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Tami call reminders</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Morning briefing</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Mandalart & vision board</span></li></ul><a class="btn" href="#download">Start free</a></div><div class="plan rv"><div class="nm">Silver</div>
+    <div class="pr">$4.99<small>/mo</small></div><ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Call Tami — unlimited voice capture</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>All brainwave & focus sounds</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Your own custom quotes</span></li></ul><a class="btn" href="#download">Get the app</a></div><div class="plan rv hi"><div class="nm">Gold<span class="badge">Best value · save 40%</span></div>
+    <div class="pr">$34.99<small>/yr</small></div><ul><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Everything in Silver</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Tami talks back — a voice assistant</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>AI insight reports</span></li><li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg><span>Early access (Apple Watch & more)</span></li></ul><a class="btn" href="#download">Get the app</a></div></div>
+  <p class="addon">Also available · Meeting notes 2h $1.99 · 5h $4.99 · 10h $8.99 · SNS Urge Guard $3.99/mo</p>
+</div></section>
+
+<section id="business" style="padding-top:20px"><div class="wrap">
+  <div class="bizbox rv">
+    <div class="bh"><div class="lab">For business · B2B</div><h2>Give your team <em>a Tami assistant</em>.</h2><p>Team schedules, meetings and repetitive marketing work — Tami keeps track of it all. We help you roll it out your way.</p>
+      <a class="btn bw" data-mail="biz" href="mailto:Karin.blockdev@gmail.com?subject=%5BBusiness%20inquiry%5D%20TimeLift&body=Company%3A%0ATeam%20size%3A%0AFeatures%20needed%20(team%20scheduling%20%2F%20meeting%20notes%20%2F%20marketing%20automation%20%2F%20other)%3A%0AContact%3A%0A">Contact sales →</a><p class="bn">Send us your company name, team size and the features you need, and we will reply with a tailored quote.</p></div>
+    <div class="bgrid"><div class="bc"><div class="pi">📅</div><div><h3>Team scheduling</h3><p>See everyone’s schedule and deadlines at a glance. Tami nudges the right person when it is time.</p></div></div><div class="bc"><div class="pi">📝</div><div><h3>Automatic meeting notes</h3><p>Record a meeting and get decisions and per-person action items, ready to share with the team.</p></div></div><div class="bc"><div class="pi">📣</div><div><h3>Marketing automation assistant</h3><p>Content calendars, campaign deadlines and recurring tasks — Tami tracks them and reminds you.</p></div></div>
+      <a class="bc etc" data-mail="etc" href="mailto:Karin.blockdev@gmail.com?subject=%5BFeature%20request%5D%20TimeLift&body=Company%3A%0AFeature%20you%20need%20(anything)%3A%0AHow%20you%20handle%20it%20today%3A%0AContact%3A%0A"><div class="pi">💡</div><div><h3>Something else you need?</h3><p>Tell us the feature your company needs, and we will look at building it for you.</p><span class="more">Request a feature →</span></div></a></div>
+  </div>
+</div></section>
+
+<section id="faq" style="padding-top:20px"><div class="wrap">
+  <div class="sh rv"><div class="lab">FAQ</div><h2>Questions, answered.</h2></div>
+  <div class="faq"><details class="rv" open><summary>Does it place a real phone call?</summary><p>No. It is an in-app screen that looks like an incoming call. No call charges and no phone number needed.</p></details><details class="rv"><summary>Do I need an account?</summary><p>Yes. Sign up in about a minute with Google, Apple or email. Your plans and records then follow you across devices.</p></details><details class="rv"><summary>Is my voice or meeting audio stored?</summary><p>AI chat and meeting notes are sent to AI providers only to produce the answer, and are not stored on our server. We ask for consent before your first AI chat.</p></details><details class="rv"><summary>Is this an ADHD treatment app?</summary><p>No. It is not a medical device and does not diagnose or treat anything. It is a planner that helps with planning and habits.</p></details><details class="rv"><summary>Which devices are supported?</summary><p>iPhone, iPad, Apple Watch, Android phones and Mac.</p></details></div>
+</div></section>
+
+<div class="end rv"><img class="m" src="img/tami-fluffy.png" alt=""><h2>Say your day <em>out loud.</em></h2><p>It takes a minute to plan it.</p><div class="stores ">
+  <a class="store" href="https://apps.apple.com/kr/app/id6762095162"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.700-3-1.900-3.600-2-1.500-.2-3 .9-3.700.9-.8 0-2-.9-3.200-.9-1.700 0-3.200 1-4 2.400-1.700 3-.4 7.400 1.200 9.800.8 1.200 1.800 2.500 3 2.400 1.200 0 1.700-.8 3.100-.8 1.500 0 1.900.8 3.200.8 1.300 0 2.100-1.200 2.900-2.400.9-1.400 1.300-2.700 1.300-2.800 0 0-2.500-1-2.300-3.700zM14 5.400c.7-.8 1.100-1.900 1-3-1 0-2.100.7-2.800 1.500-.6.700-1.200 1.800-1 2.900 1.100.1 2.100-.6 2.800-1.400z"/></svg><span><small>App Store</small>Korea</span><img class="flag" src="img/flag-kr.svg" alt=""></a>
+  <a class="store" href="https://apps.apple.com/us/app/id6762095162"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.700-3-1.900-3.600-2-1.500-.2-3 .9-3.700.9-.8 0-2-.9-3.200-.9-1.700 0-3.200 1-4 2.400-1.700 3-.4 7.400 1.200 9.800.8 1.200 1.800 2.500 3 2.400 1.200 0 1.700-.8 3.100-.8 1.500 0 1.900.8 3.200.8 1.300 0 2.100-1.200 2.900-2.400.9-1.400 1.300-2.700 1.300-2.800 0 0-2.500-1-2.300-3.700zM14 5.400c.7-.8 1.100-1.900 1-3-1 0-2.100.7-2.800 1.500-.6.700-1.200 1.800-1 2.900 1.100.1 2.100-.6 2.800-1.400z"/></svg><span><small>App Store</small>USA</span><img class="flag" src="img/flag-us.svg" alt=""></a>
+  <span class="store off" aria-disabled="true"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#00D7FE" d="M3.6 2.300 13.400 12 3.600 21.700c-.4-.2-.6-.6-.6-1.100V3.400c0-.5.2-.9.6-1.100z"/><path fill="#FFCE00" d="m16.800 8.600-3.400 3.400 3.400 3.400 3.800-2.200c1-.6 1-1.900 0-2.400z"/><path fill="#FF3A44" d="M13.400 12 3.600 21.700c.3.2.8.2 1.300 0l11.900-6.300z"/><path fill="#00F076" d="M13.400 12 16.800 8.600 4.900 2.300c-.5-.3-1-.2-1.300 0z"/></svg><span><small>Back in December</small>Google Play</span></span>
+</div></div>
+
+<footer><div class="wrap">
+  <div class="fg"><div><a class="logo" href="#top"><img src="img/icon.png" alt="">TimeLift</a><p style="margin:14px 0 0;max-width:300px;line-height:1.6">Say it, it's planned. Then Tami calls you.</p></div>
+  <div><h4>Product</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="https://timelift.app/download-en.html">Mac app</a></div><div><h4>Download</h4><a href="https://apps.apple.com/kr/app/id6762095162">App Store · Korea</a><a href="https://apps.apple.com/us/app/id6762095162">App Store · US</a><a href="#download">Google Play · back in December</a></div><div><h4>Help</h4><a href="https://timelift.app/support.html">Support</a><a href="#business">Business inquiry</a><a href="#faq">FAQ</a></div></div>
+  <div class="fb"><span>© 2026 TimeLift</span><span><a href="https://timelift.app/terms.html">Terms of Use</a><a href="https://timelift.app/privacy-policy.html">Privacy Policy</a><a href="index.html">한국어</a></span></div>
+</div></footer>
+
+<div id="maildlg" class="mdlg"><div class="mbox"><h3>Send an inquiry</h3><p>Pick whichever is easiest.</p><div class="maddr">Karin.blockdev@gmail.com</div>
+  <a id="m-gmail" class="btn pk" target="_blank" rel="noopener">Send with Gmail</a><a id="m-app" class="btn mg">Open my mail app</a>
+  <button id="m-copy" class="btn mg" data-done="Copied!">Copy email address</button><button class="mx" data-x="1">Close</button></div></div>
+<script>
+const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>8),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// 📮 문의: 컴퓨터에 메일 앱이 없으면 mailto가 아무 반응이 없어서, 고르는 창을 띄운다
+const MAILS={"to":"Karin.blockdev@gmail.com","biz":["[Business inquiry] TimeLift","Company:\nTeam size:\nFeatures needed (team scheduling / meeting notes / marketing automation / other):\nContact:\n"],"etc":["[Feature request] TimeLift","Company:\nFeature you need (anything):\nHow you handle it today:\nContact:\n"]};
+const dlg=document.getElementById('maildlg');let cur='biz';
+const q=k=>'?subject='+encodeURIComponent(MAILS[k][0])+'&body='+encodeURIComponent(MAILS[k][1]);
+document.querySelectorAll('[data-mail]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();cur=a.dataset.mail;
+  document.getElementById('m-gmail').href='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(MAILS.to)+'&su='+encodeURIComponent(MAILS[cur][0])+'&body='+encodeURIComponent(MAILS[cur][1]);
+  document.getElementById('m-app').href='mailto:'+MAILS.to+q(cur);dlg.classList.add('on')}));
+dlg.addEventListener('click',e=>{if(e.target===dlg||e.target.dataset.x)dlg.classList.remove('on')});
+document.getElementById('m-copy').addEventListener('click',async e=>{const b=e.currentTarget;try{await navigator.clipboard.writeText(MAILS.to)}catch{const t=document.createElement('textarea');t.value=MAILS.to;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}
+  const o=b.textContent;b.textContent=b.dataset.done;setTimeout(()=>b.textContent=o,1600)});
+</script>
+</body>
+</html>
