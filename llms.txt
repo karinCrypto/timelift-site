@@ -1,0 +1,25 @@
+# TimeLift (타임리프트)
+
+> TimeLift is an AI voice planner. Say your tasks and Tami turns them into a daily plan, then rings you like a phone call when it is time. To-dos, time blocking, Pomodoro, morning briefing, meeting notes, Mandalart and vision board.
+
+타임리프트는 말하면 계획이 끝나는 AI 비서 플래너예요. 할 일을 말하면 타미가 하루 시간표로 정리하고, 시간이 되면 전화처럼 알려 줘요. 투두, 타임블로킹, 뽀모도로, 모닝 브리핑, 회의록, 만다라트, 비전보드까지.
+
+## Key facts
+- Name: TimeLift (Korean: 타임리프트). AI assistant inside the app: Tami (타미).
+- Category: AI planner / to-do / time management app.
+- Platforms: iPhone, iPad, Apple Watch, Mac. Google Play (Android) returns in December 2026.
+- Origin: started on December 5, 2025 in a hotel room in Abu Dhabi, UAE, by a developer who used a paper planner on frequent business trips.
+- Timeline: beta with time blocking and Pomodoro (March 2026); Tami, call screen, alarms, focus mode (July 2026); Tami morning briefing (October 2026); speak-to-plan, meeting notes, account backup, App Store 2.9.5 (November 2026).
+- Price: free to download.
+
+## Pages
+- [TimeLift home (Korean)](https://timelift.io/): features, how it works, pricing, FAQ
+- [TimeLift home (English)](https://timelift.io/en.html): features, how it works, pricing, FAQ
+- [Story (Korean)](https://timelift.io/story.html): how TimeLift began and grew
+- [Story (English)](https://timelift.io/story-en.html): how TimeLift began and grew
+- [Download (Korean)](https://timelift.io/download.html)
+- [Download (English)](https://timelift.io/download-en.html)
+
+## Get the app
+- [App Store, Korea](https://apps.apple.com/kr/app/id6762095162)
+- [App Store, US](https://apps.apple.com/us/app/id6762095162)
