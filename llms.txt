@@ -9,7 +9,7 @@
 - Category: AI planner / to-do / time management app.
 - Platforms: iPhone, iPad, Apple Watch, Mac. Google Play (Android) returns in December 2026.
 - Origin: started on December 5, 2025 in a hotel room in Abu Dhabi, UAE, by a developer who used a paper planner on frequent business trips.
-- Timeline: beta with time blocking and Pomodoro (March 2026); Tami, call screen, alarms, focus mode (July 2026); Tami morning briefing (October 2026); speak-to-plan, meeting notes, account backup, App Store 2.9.5 (November 2026).
+- Timeline: web version launched (February 2026); time blocking and Pomodoro beta (March 2026); first Android launch and the "Tami robot" idea (May 2026); Tami who calls you, call screen, alarms, social-blocking focus mode, watch prototype (July 2026); Tami morning briefing (October 2026); speak-to-plan, meeting notes, account backup, App Store 2.9.5 (November 2026).
 - Price: free to download.
 
 ## Pages

@@ -155,6 +155,12 @@ th:nth-child(2){color:var(--pink);font-size:16px}
 .stw img{width:52px;height:52px;border-radius:50%;background:var(--soft);object-fit:contain}
 .stw b{display:block;font-size:16px}.stw small{color:var(--ink2);font-size:13.5px}.stw i{font-style:normal;margin-left:auto;font-size:12.5px;font-weight:800;color:var(--pink);background:var(--soft);padding:6px 12px;border-radius:99px}
 .tl{list-style:none}
+.lang.stb{color:var(--pink);background:var(--soft);border-color:rgba(224,69,127,.25);white-space:nowrap}
+.stcard{display:inline-flex;align-items:center;gap:12px;margin-top:20px;padding:10px 18px 10px 10px;background:#fff;border:1px solid rgba(224,69,127,.22);border-radius:99px;box-shadow:0 10px 26px rgba(224,69,127,.12);transition:transform .15s,box-shadow .15s;max-width:100%}
+.stcard:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(224,69,127,.2)}
+.stcard img{width:40px;height:40px;border-radius:50%;background:var(--soft);object-fit:contain;flex:none}
+.stcard span{font-weight:750;font-size:15px;line-height:1.35}.stcard small{display:block;font-size:12px;font-weight:800;color:var(--pink)}
+.stcard b{color:var(--pink);font-size:18px;margin-left:4px}
 .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
 .shots figure{margin:0}.shots a{display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff;aspect-ratio:4/3;box-shadow:0 10px 24px rgba(224,69,127,.10);transition:transform .15s}
 .shots a:hover{transform:translateY(-2px)}.shots img{width:100%;height:100%;object-fit:cover;object-position:top}
@@ -269,8 +275,8 @@ footer{padding:64px 0 40px;color:var(--ink2);font-size:15px}
 <body>
 <nav id="nav"><div class="wrap nav">
   <a class="logo" href="#top" aria-label="타임리프트 TimeLift"><img src="img/icon.png" alt="타임리프트 로고">TimeLift</a>
-  <div class="links"><a href="#features">기능</a><a href="#how">사용법</a><a href="#pricing">요금</a><a href="#business">기업용</a><a href="#faq">자주 묻는 질문</a><a href="story.html">스토리</a></div>
-  <div class="right"><a class="lang" href="en.html">EN</a><a class="btn pk" href="#download">무료로 시작하기</a></div>
+  <div class="links"><a href="#features">기능</a><a href="#how">사용법</a><a href="#pricing">요금</a><a href="#business">기업용</a><a href="#faq">자주 묻는 질문</a></div>
+  <div class="right"><a class="lang stb" href="story.html">📖 스토리</a><a class="lang" href="en.html">EN</a><a class="btn pk" href="#download">무료로 시작하기</a></div>
 </div></nav>
 
 <header class="hero" id="top"><div class="wrap">
@@ -285,6 +291,7 @@ footer{padding:64px 0 40px;color:var(--ink2);font-size:15px}
   <span class="store off" aria-disabled="true"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#00D7FE" d="M3.6 2.300 13.400 12 3.600 21.700c-.4-.2-.6-.6-.6-1.100V3.400c0-.5.2-.9.6-1.100z"/><path fill="#FFCE00" d="m16.800 8.600-3.400 3.400 3.400 3.400 3.800-2.200c1-.6 1-1.900 0-2.400z"/><path fill="#FF3A44" d="M13.400 12 3.600 21.700c.3.2.8.2 1.300 0l11.900-6.300z"/><path fill="#00F076" d="M13.400 12 16.800 8.600 4.900 2.300c-.5-.3-1-.2-1.300 0z"/></svg><span><small>12월 재출시 예정</small>Google Play</span></span>
 </div></div>
       <p class="fine">1분 무료 가입 · 기본 기능 무료 · 언제든 해지</p>
+      <a class="stcard" href="story.html"><img src="img/tami-fluffy.png" alt=""><span><small>개발 스토리</small>아부다비 호텔 방에서 시작된 타임리프트 이야기</span><b aria-hidden="true">→</b></a>
     </div>
     <div class="stage">
       <div class="phone p2"><div class="scr dk" style="--sbg:#050306"><div class="sb"><span class="tm">9:41</span><span class="isl"></span><span class="ic"><svg class="sig" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.500" width="3" height="6.500" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg class="wifi" viewBox="0 0 16 12"><path d="M8 2.200c2.300 0 4.400.9 6 2.400l1.300-1.400A10.700 10.700 0 0 0 8 .3 10.700 10.700 0 0 0 .7 3.200L2 4.600a8.700 8.700 0 0 1 6-2.400zm0 3.700c1.300 0 2.500.5 3.400 1.300l1.300-1.400A6.800 6.800 0 0 0 8 4a6.800 6.800 0 0 0-4.700 1.800l1.300 1.400c.9-.8 2.100-1.300 3.400-1.300zM8 9.700l2-2.100a3 3 0 0 0-4 0z"/></svg><span class="bat"><i></i></span></span></div><img src="img/ko-call.jpg" alt="타임리프트 AI 플래너 앱 화면"><span class="hb"></span></div></div>
